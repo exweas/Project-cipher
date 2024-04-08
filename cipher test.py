@@ -1,5 +1,7 @@
-def __init__(self, key, alphabet):
-        self.alphabet = alphabet
-        self.key = key
+def vigenere(text, key, mode):
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # определение алфавита
+    key = key.upper()  # перевод ключа в верхний регистр
+    key_length = len(key)  # определение длины ключа
+    encrypted_text = ''  # инициализация зашифрованного текста
 
-    def chiper(self, text, mode):
+
