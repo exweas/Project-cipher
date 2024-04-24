@@ -17,8 +17,8 @@ def vigenere(text, key, mode):
             result_text += text[i]  # добавление символа к результату без шифровки
     return result_text
 
-text = 'What is love'  # исходный текст
-key = 'Monkey'  # ключ
+text = 'IRNITU'  # исходный текст
+key = 'IRKUTSK'  # ключ
 encrypted_text = vigenere(text, key, 'encrypt')  # зашифрованный текст
 decrypted_text = vigenere(encrypted_text, key, 'decrypt')  # расшифрованный текст
 
