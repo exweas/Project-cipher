@@ -51,7 +51,7 @@ key = "IRKUTSK"
 # Создадим экземпляр класса VigenereCipher
 cipher = VigenereCipher(key, alphabet)
 
-# Зашифруем слово 'waffles', а затем передадим результат метода 
+# Зашифруем слово 'IRNITU', а затем передадим результат метода 
 # для расшифровки, ожидаем получить исходное слово 'IRNITU'.
 encoded = cipher.encode('IRNITU')
 decoded = cipher.decode(encoded)
