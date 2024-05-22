@@ -46,20 +46,20 @@ class VigenereCipher(object):
 
 # Зададим алфавит и ключ
 alphabet = "abcdefghijklmnopqrstuvwxyz"
-key = "password"
+key = "IRKUTSK"
 
 # Создадим экземпляр класса VigenereCipher
 cipher = VigenereCipher(key, alphabet)
 
 # Зашифруем слово 'waffles', а затем передадим результат метода 
-# для расшифровки, ожидаем получить исходное слово 'waffles'.
-encoded = cipher.encode('waffles')
+# для расшифровки, ожидаем получить исходное слово 'IRNITU'.
+encoded = cipher.encode('IRNITU')
 decoded = cipher.decode(encoded)
 
-# Проверим, получили ли мы слово 'waffles' после шифрования
+# Проверим, получили ли мы слово 'IRNITU' после шифрования
 # и последующего дешифрования, и выведем соответствующее
 # сообщение
-if decoded == 'waffles':
+if decoded == 'IRNITU':
     print('Your programm is okay')
 else:
     print('There are some errors in your programm')
