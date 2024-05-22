@@ -1,28 +1,65 @@
-def vigenere(text, key, mode):
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # определение алфавита
-    key = key.upper()  # перевод ключа в верхний регистр
-    key_length = len(key)  # определение длины ключа
-    result_text = ''  # инициализация  текста с результатом
+class VigenereCipher(object):
+    """
+    Класс реализует шифр Виженера.
+    """
+    def __init__(self, key, alphabet):
+        self.alphabet = alphabet
+        self.key = key
 
-    for i in range(len(text)):  # проход по символам текста
-        if text[i].isalpha():  # если символ буквенный
-            key_char = key[i % key_length]  # выбор символа ключа для данной итерации
-            if mode == 'encrypt':  # если режим зашифровки
-                shift = alphabet.index(key_char)
-            elif mode == 'decrypt':  # если режим расшифровки
-                shift = -alphabet.index(key_char)  # определение сдвига для расшифровки
-            result_char = alphabet[(alphabet.index(text[i].upper()) + shift) % 26]  # шифрование/расшифровывание символа
-            result_text += result_char if text[i].isupper() else result_char.lower()  # добавление символа к результату, учитывая регистр
-        else:
-            result_text += text[i]  # добавление символа к результату без шифровки
-    return result_text
+    def chiper(self, text, mode):
+        """
+        Метод реализует шифровку/дешифровку в зависимости от параметра mode.
 
-text = 'IRNITU'  # исходный текст
-key = 'IRKUTSK'  # ключ
-encrypted_text = vigenere(text, key, 'encrypt')  # зашифрованный текст
-decrypted_text = vigenere(encrypted_text, key, 'decrypt')  # расшифрованный текст
+        Аргументы:
+            text: текст для шифровки/дешифровки
+            mode: режим работы метода: 'encode' (шифровка) или 'decode' (дешифровки).
+        """
+        PLUS_OR_MINUS = 1 if mode == 'encode' else -1
 
-print('Original text:', text)  # вывод исходного текста
-print('Encrypted text:', encrypted_text)  # вывод зашифрованного текста
-print('Decrypted text:', decrypted_text)  # вывод расшифрованного текста
+        result = ''
+        for text_index, char in enumerate(text):
+            if char in self.alphabet:
+                alphabet_index = self.alphabet.index(char)
+                key_index = text_index % len(self.key)
+                key_char = self.key[key_index]
+                bias_index = self.alphabet.index(key_char)
+                encode_index = (
+                    alphabet_index + PLUS_OR_MINUS * bias_index
+                ) % len(self.alphabet)
+                result += self.alphabet[encode_index]
+            else:
+                result += char
 
+        return result
+
+    def encode(self, text):
+        """
+        Метод для шифровки текста, вызывает метод chiper с mode='encode'.
+        """
+        return self.chiper(text, 'encode')
+
+    def decode(self, text):
+        """
+        Метод для дешифровки текста, вызывает метод chiper с mode='decode'.
+        """
+        return self.chiper(text, 'decode')
+
+# Зададим алфавит и ключ
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+key = "password"
+
+# Создадим экземпляр класса VigenereCipher
+cipher = VigenereCipher(key, alphabet)
+
+# Зашифруем слово 'waffles', а затем передадим результат метода 
+# для расшифровки, ожидаем получить исходное слово 'waffles'.
+encoded = cipher.encode('waffles')
+decoded = cipher.decode(encoded)
+
+# Проверим, получили ли мы слово 'waffles' после шифрования
+# и последующего дешифрования, и выведем соответствующее
+# сообщение
+if decoded == 'waffles':
+    print('Your programm is okay')
+else:
+    print('There are some errors in your programm')
