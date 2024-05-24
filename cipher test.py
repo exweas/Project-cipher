@@ -44,22 +44,27 @@ class VigenereCipher(object):
         """
         return self.chiper(text, 'decode')
 
-# Зададим алфавит и ключ
+
+# Зададим алфавит
 alphabet = "abcdefghijklmnopqrstuvwxyz"
-key = "IRKUTSK"
+
+# Запросим у пользователя ключ
+key = input("Enter key: ")
+
+# Запросим у пользователя слово, которое нужно зашифровать
+word = input("Enter word: ")
 
 # Создадим экземпляр класса VigenereCipher
 cipher = VigenereCipher(key, alphabet)
 
-# Зашифруем слово 'IRNITU', а затем передадим результат метода 
-# для расшифровки, ожидаем получить исходное слово 'IRNITU'.
-encoded = cipher.encode('IRNITU')
-decoded = cipher.decode(encoded)
+# Отделим результат работы пустой строкой
+print()
+# Выведем исходный текст
+print(f"Original text: {word}")
 
-# Проверим, получили ли мы слово 'IRNITU' после шифрования
-# и последующего дешифрования, и выведем соответствующее
-# сообщение
-if decoded == 'IRNITU':
-    print('Your programm is okay')
-else:
-    print('There are some errors in your programm')
+# Зашифруем текст и выведем результат шифрования
+encoded = cipher.encode(word)
+print(f"Encoded text: {encoded}")
+
+# Расшифруем текст и выведем результат расшифровки
+print(f"Decoded text: {cipher.decode(encoded)}")
